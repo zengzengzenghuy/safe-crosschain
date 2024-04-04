@@ -163,13 +163,13 @@ const config: HardhatUserConfig = {
     // tests: "./test_axiom",
   },
   solidity: {
-    // can't use >= 0.8.18 because of this: https://github.com/safe-global/safe-contracts/issues/544
-    version: "0.8.17",
+    version: "0.8.23",
     settings: {
+      evmVersion: "paris",
       viaIR: true,
       optimizer: {
         enabled: true,
-        runs: 800,
+        runs: 10000,
       },
     },
   },

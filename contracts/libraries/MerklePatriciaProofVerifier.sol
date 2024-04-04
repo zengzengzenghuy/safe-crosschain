@@ -1,4 +1,4 @@
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.23;
 /* solhint-disable */
 
 import { RLPReader } from "solidity-rlp/contracts/RLPReader.sol";
