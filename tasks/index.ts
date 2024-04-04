@@ -5,6 +5,8 @@ import Safe from "@safe-global/protocol-kit"
 import { verify } from "./verify"
 import { getProof } from "./utils"
 
+import './axiom'
+
 import { ProofStructOutput, SafeTxParamsStruct } from "../types/Controller"
 
 task("Peripheral:deploy", "deploy Peripheral")
@@ -37,6 +39,23 @@ task("ControllerModule:deploy", "deploy ControllerModule")
     const controllerModule = await ControllerModule.deploy(...constructorArguments)
     console.log("ControllerModule deployed at: ", controllerModule.address)
     if (_taskArgs.verify) await verify(hre, controllerModule, constructorArguments)
+  })
+
+task("AxiomControllerModule:deploy", "deploy AxiomControllerModule")
+  .addParam("axiomV2Query", "AxiomV2Query address", undefined, types.string)
+  .addParam("sourceChainId", "source chain id", undefined, types.int)
+  .addParam("querySchema", "Query schema", undefined, types.string)
+  .addFlag("verify", "whether to verify the contract on Etherscan")
+  .setAction(async (_taskArgs, hre) => {
+    const AxiomControllerModule = await hre.ethers.getContractFactory("AxiomControllerModule")
+    const constructorArguments = [
+      _taskArgs.axiomV2Query,
+      _taskArgs.sourceChainId,
+      _taskArgs.querySchema
+    ] as const
+    const axiomControllerModule = await AxiomControllerModule.deploy(...constructorArguments)
+    console.log("AxiomControllerModule deployed at: ", axiomControllerModule.address)
+    if (_taskArgs.verify) await verify(hre, axiomControllerModule, constructorArguments)
   })
 
 task("ControllerModule:execTransaction:sendNativeToken", "Sends 1 wei")
