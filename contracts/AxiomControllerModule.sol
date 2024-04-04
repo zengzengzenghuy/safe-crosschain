@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.23;
 
 import { RLPReader } from "solidity-rlp/contracts/RLPReader.sol";
 import { MerklePatriciaProofVerifier } from "./libraries/MerklePatriciaProofVerifier.sol";
